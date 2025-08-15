@@ -7,7 +7,7 @@ public class Main {
 
        /*To do list:
         - project base - check
-        - add library (SQLite or PostgresSQL - talk with the animal shelter)
+        - add library (SQLite or PostgresSQL - talk with the animal shelter) -- installed SQLite for the MVP, later switch to PostgresSQL
         - config database
         - create:
           - models
