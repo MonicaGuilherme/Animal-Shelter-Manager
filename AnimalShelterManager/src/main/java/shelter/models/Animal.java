@@ -31,7 +31,20 @@ public class Animal {
         this(-1,name, species, breed, age, temperament, adopted);
     }
 
-    // Getters and Setters 
-
+    // Getters and Setters
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getSpecies() { return species; }
+    public void setSpecies(String species) { this.species = species; }
+    public String getBreed() { return breed; }
+    public void setBreed(String breed) { this.breed = breed; }
+    public int getAge() { return age; }
+    public void setAge(int age) { this.age = age; }
+    public String getTemperament() { return temperament; }
+    public void setTemperament(String temperament) { this.temperament = temperament; }
+    public boolean isAdopted() { return adopted; }
+    public void setAdopted(boolean adopted) { this.adopted = adopted; }
 
 }
