@@ -1,56 +1,30 @@
 # 🐾 Animal Shelter Manager
 
-A work-in-progress project focused on building a management tool to help animal shelter volunteers better organize and track information about the animals in their care.
-
 ## Purpose
 
-The goal of this application is to make it easier for shelters to:
+Animal Shelter Manager is a web application designed to help associations manage the animals under their care. It simplifies the processes of registering and updating information about animals, adoption or foster families, and any veterinary interventions. The application is accessible via any browser and supports multiple users with different access levels.
 
-- Store and update animal profiles (dogs, cats, etc.)
-- Track medical records, adoption status, and other essential info
-- Improve efficiency and reduce paper-based tracking
-- Support volunteers with an intuitive and accessible interface
+The project prioritizes:
+- Reliable data persistence (relational storage)
+- Information security (access control and protection of sensitive data)
+- Intuitive usage (responsive and user-friendly interface)
 
 ## Status
 
-**In development**  
-This project is still in its early stages. The current focus is on defining the structure, planning core features, and setting up the base architecture.
+**Initial phase**
+The project already has a defined folder structure and the core technologies are chosen. The current focus is on connecting all components and developing the application.
 
 ## Planned Tech Stack
 
-The core technologies planned for this project are flexible enough to support both local and web-based usage:
-
-- **Frontend**  
-  JavaScript, HTML, CSS  
-  I'm currently exploring **Tailwind CSS** for utility-first styling and **React** to build a responsive and scalable interface.
-
-- **Backend**  
-  Java with Spring Boot
-
-- **Database**  
-  PostgreSQL
-
-## Deployment vs Local Use
-
-One of the project’s key decisions is still open: whether the final product will be a **locally hosted** application or a **deployed web-based** solution.
-
-This choice will depend on the needs and capabilities of the animal shelters using it.
-
-**Two main approaches are being considered:**
-
-- **Local installation**, running directly on a shelter's computer or internal network:
-  - Spring Boot backend serving the app locally
-  - PostgreSQL (or SQLite, if needed)
-  - Optional packaging as a desktop app (e.g., with Electron)
-  - Optional offline capabilities via PWA features
-
-- **Web deployment**, accessible via browser:
-  - Hosted backend (Spring Boot API)
-  - Cloud-hosted PostgreSQL database
-  - Frontend deployed via platforms like Netlify or Render
-
-> The final decision will prioritize simplicity, ease of use, and the real-world context in which each shelter operates.  
-> The tech stack is also subject to change depending on technical requirements and practical constraints.
+| Layer            | Technology                                     |
+| ---------------- | ---------------------------------------------- |
+| Frontend         | React + Tailwind CSS + Vite                    |
+| Authentication   | Supabase Auth                                  |
+| Document Storage | Supabase Storage                               |
+| Backend          | Java + Spring Boot + Spring Security           |
+| Database         | PostgreSQL (Render)                            |
+| Hosting          | Render (backend + database), Vercel (frontend) |
+| Repository       | GitHub with automatic CI/CD                    |
 
 ## Preview
 
