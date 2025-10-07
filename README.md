@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Animal Shelter Manager is a web application designed to help associations manage the animals under their care. It simplifies the processes of registering and updating information about animals, adoption or foster families, and any veterinary interventions. The application is accessible via any browser and supports multiple users with different access levels.
+This web application is being developed to help associations manage the animals under their care. It's goal is to simplify the processes of registering and updating information about animals, adoption or foster families, and any veterinary interventions. The application will be accessible through any browser and support multiple users with different access levels.
 
 The project prioritizes:
 - Reliable data persistence (relational storage)
@@ -32,5 +32,7 @@ Screenshots or a live demo will be added once the basic functionality is in plac
 
 ---
 
-> This project is both a learning journey and a real-world solution in the making.  
+> This project is both a learning journey and a real-world solution in progress.
+It’s a project very close to my heart, built with care and with a deep awareness of the realities animal associations face.
+> It may take time, but it will come to life.  
 > Contributions, feedback, or ideas are always welcome! 🐶🐱
