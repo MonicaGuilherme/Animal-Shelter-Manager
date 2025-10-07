@@ -32,7 +32,7 @@ Screenshots or a live demo will be added once the basic functionality is in plac
 
 ---
 
-> This project is both a learning journey and a real-world solution in progress.
+> This project is both a learning journey and a real-world solution.
 It’s a project very close to my heart, built with care and with a deep awareness of the realities animal associations face.
 > It may take time, but it will come to life.  
 > Contributions, feedback, or ideas are always welcome! 🐶🐱
