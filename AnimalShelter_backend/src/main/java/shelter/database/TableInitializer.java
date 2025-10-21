@@ -18,11 +18,12 @@ public class TableInitializer {
             CREATE TABLE IF NOT EXISTS animals (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
-                species TEXT NOT NULL,
-                breed TEXT,
-                age INTEGER,
-                temperament TEXT,
-                medical_history TEXT
+                sex TEXT NOT NULL,
+                size TEXT NOT NULL,
+                chip BOOLEAN NOT NULL,
+                vaccines TEXT NOT NULL,
+                sterilization BOOLEAN NOT NULL,
+                type TEXT NOT NULL CHECK (type IN ('Interno'. 'Externo'))
             );
             """;
 

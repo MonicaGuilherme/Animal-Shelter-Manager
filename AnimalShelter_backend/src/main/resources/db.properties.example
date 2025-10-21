@@ -1,3 +1,8 @@
-db.url=jdbc:postgresql://localhost:5432/animalShelter
-db.user=your_username
-db.password=your_password
+#This file serves as an example of the database configuration.
+# Copy this file to 'db.properties' (folder resources) and fill in your real database credentials.
+# DO NOT commit 'db.properties' to Git.
+
+db.driver=org.postgresql.Driver
+db.url=jdbc:postgresql://localhost:5432/animalshelter
+db.user=your_db_username
+db.password=your_db_password
