@@ -10,17 +10,5 @@ import java.util.List;
  * Keeps controllers and DAOs separated.
  */
 public class AnimalService {
-    private AnimalDAO animalDAO;
 
-    public AnimalService() {
-        this.animalDAO = new AnimalDAO();
-    }
-
-    public void addAnimal(Animal animal) {
-        animalDAO.addAnimal(animal);
-    }
-
-    public List<Animal> getAllAnimals() {
-        return animalDAO.getAllAnimals();
-    }
 }

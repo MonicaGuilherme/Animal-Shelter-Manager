@@ -1,35 +1,48 @@
 package shelter.database;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 /**
- * Handles database connections for the shelter system.
- * Uses SQLite (local file-based database).
+ * DatabaseManager
+ * - Responsible for reading DB configuration from resources/db.properties
+ * - Provides a Connection to the PostgreSQL database.
  */
 public class DatabaseManager {
 
-    // Path to the SQLite database file
-    private static final String DB_URL = "jdbc:sqlite:shelter.db";
+    private static final Properties props = new Properties();
 
-    /**
-     * Loads the SQLite JDBC driver (optional for newer versions but kept for clarity).
-     */
     static {
-        try {
-            Class.forName("org.sqlite.JDBC"); // Load the driver
-        } catch (ClassNotFoundException e) {
-            System.err.println("SQLite JDBC driver not found. Did you add the JAR to /lib?");
-            e.printStackTrace();
+        try (InputStream in = DatabaseManager.class.getClassLoader().getResourceAsStream("db.properties")) {
+            if (in == null) {
+                throw new RuntimeException("db.properties not found in classpath. Copy db.properties.example to db.properties and fill in credentials.");
+            }
+            props.load(in);
+            // Explicitly loads the JDBC driver class if specified in the configuration properties.
+            // Ensures compatibility with older drivers or environments where auto-registration may fail.
+            // This precaution helps prevent runtime connection issues and guarantees that the driver is available when initializing the database connection.
+            String driver = props.getProperty("db.driver");
+            if (driver != null && !driver.isEmpty()) {
+                Class.forName(driver);
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            throw new ExceptionInInitializerError("Failed to load database properties or driver: " + e.getMessage());
         }
     }
 
     /**
-     * Returns a connection to the database.
-     * Remember: Caller must close the connection after use.
+     * Obtain a new Connection using properties from db.properties.
+     * Caller should close the connection.
      */
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(DB_URL);
+        String url = props.getProperty("db.url");
+        String user = props.getProperty("db.user");
+        String password = props.getProperty("db.password");
+        return DriverManager.getConnection(url, user, password);
     }
 }
+

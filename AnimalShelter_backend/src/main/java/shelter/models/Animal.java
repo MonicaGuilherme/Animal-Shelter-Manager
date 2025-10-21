@@ -8,43 +8,100 @@ package shelter.models;
  */
 public class Animal {
 
-    private int id;            // Unique ID
-    private String name;       // Animal name
-    private String species;    // Species (Dog or Cat)
-    private String breed;      // Breed (specific breed of the animal)
-    private int age;           // Age in years
-    private String temperament; // Temperament description
-    private boolean adopted;   // Whether the animal has been adopted
+        private int id;
+        private String species;
+        private String name;
+        private String sex;
+        private String size;
+        private boolean chip;
+        private boolean vaccines;
+        private boolean sterilized;
+        private String type;
 
-    public Animal(int id, String name, String species, String breed, int age, String temperament, boolean adopted) {
+        // constructors, getters, setters
+        public Animal() {}
+
+        public Animal(String name, String sex, String size, boolean chip, boolean vaccines, boolean sterilized, String type) {
+            this.name = name;
+            this.sex = sex;
+            this.size = size;
+            this.chip = chip;
+            this.vaccines = vaccines;
+            this.sterilized = sterilized;
+            this.type = type;
+        }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
         this.id = id;
-        this.name = name;
+    }
+
+    public String getSpecies() {
+        return species;
+    }
+
+    public void setSpecies(String species) {
         this.species = species;
-        this.breed = breed;
-        this.age = age;
-        this.temperament = temperament;
-        this.adopted = adopted;
     }
 
-    // Constructor without ID (for new animals before saving to DB)
-    public Animal(String name, String species, String breed, int age, String temperament, boolean adopted) {
-        this(-1,name, species, breed, age, temperament, adopted);
+    public String getName() {
+        return name;
     }
 
-    // Getters and Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
-    public String getSpecies() { return species; }
-    public void setSpecies(String species) { this.species = species; }
-    public String getBreed() { return breed; }
-    public void setBreed(String breed) { this.breed = breed; }
-    public int getAge() { return age; }
-    public void setAge(int age) { this.age = age; }
-    public String getTemperament() { return temperament; }
-    public void setTemperament(String temperament) { this.temperament = temperament; }
-    public boolean isAdopted() { return adopted; }
-    public void setAdopted(boolean adopted) { this.adopted = adopted; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public boolean isChip() {
+        return chip;
+    }
+
+    public void setChip(boolean chip) {
+        this.chip = chip;
+    }
+
+    public boolean isVaccines() {
+        return vaccines;
+    }
+
+    public void setVaccines(boolean vaccines) {
+        this.vaccines = vaccines;
+    }
+
+    public boolean isSterilized() {
+        return sterilized;
+    }
+
+    public void setSterilized(boolean sterilized) {
+        this.sterilized = sterilized;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }
+
+

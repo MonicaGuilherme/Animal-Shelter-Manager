@@ -5,13 +5,15 @@ import shelter.database.TableInitializer;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Animal Shelter Manager... a small start!!");
 
-        TableInitializer.initialize();
-
-        System.out.println("Shelter system started.");
-
-
+/**
+ * Entry point used to test DB connection and create tables.
+ */
+                System.out.println("Starting database initialization...");
+                TableInitializer.initialize();
+                System.out.println("Done.");
 
     }
 }
+
+
