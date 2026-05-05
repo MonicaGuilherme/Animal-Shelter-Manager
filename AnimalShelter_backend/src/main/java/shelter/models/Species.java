@@ -1,4 +1,7 @@
 package shelter.models;
 
-public class Species {
+public enum Species {
+    CAT,
+    DOG
+
 }
