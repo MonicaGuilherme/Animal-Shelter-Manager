@@ -6,88 +6,108 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- * TableInitializer
- * - Creates 'animal' table if it doesn't exist.
- * - Inserts two sample animals for initial data.
+ * Creates the database tables needed by the application.
  */
 public class TableInitializer {
 
     public static void initialize() {
+
         try (Connection conn = DatabaseManager.getConnection()) {
-            conn.setAutoCommit(false);
+
             createAnimalTable(conn);
             insertSampleAnimals(conn);
-            conn.commit();
+
             System.out.println("Database initialized successfully.");
+
         } catch (SQLException e) {
+
+            System.err.println("Failed to initialize database.");
             e.printStackTrace();
-            System.err.println("Failed to initialize database: " + e.getMessage());
         }
     }
 
+    /**
+     * Creates the animal table if it does not already exist.
+     */
     private static void createAnimalTable(Connection conn) throws SQLException {
-        String create = """
+
+        String sql = """
             CREATE TABLE IF NOT EXISTS animal (
                 id SERIAL PRIMARY KEY,
-                species TEXT NOT NULL,
-                name TEXT NOT NULL,
+                species VARCHAR(20) NOT NULL,
+                breed VARCHAR(50) NOT NULL,
+                name VARCHAR(100) NOT NULL,
                 sex VARCHAR(10) NOT NULL,
                 size VARCHAR(20) NOT NULL,
                 chip BOOLEAN DEFAULT FALSE,
                 vaccines BOOLEAN DEFAULT FALSE,
                 sterilized BOOLEAN DEFAULT FALSE,
-                type VARCHAR(20) NOT NULL CHECK (type IN ('Interno', 'Externo')),
                 created_at TIMESTAMP WITH TIME ZONE DEFAULT now()
             );
             """;
 
         try (Statement stmt = conn.createStatement()) {
-            stmt.execute(create);
-            System.out.println("'animal' table ensured.");
+            stmt.execute(sql);
+            System.out.println("Animal table ready.");
         }
     }
 
+    /**
+     * Inserts sample animals only if the table is empty.
+     */
     private static void insertSampleAnimals(Connection conn) throws SQLException {
-        // check if table already has rows; if yes, skip inserting sample data
-        try (Statement stmt = conn.createStatement();
-             var rs = stmt.executeQuery("SELECT count(*) FROM animal")) {
-            rs.next();
-            int count = rs.getInt(1);
-            if (count > 0) {
-                System.out.println("Animal table already populated, skipping sample inserts.");
-                return;
-            }
+
+        if (animalTableHasData(conn)) {
+            System.out.println("Animal table already has data. Skipping sample inserts.");
+            return;
         }
 
-        String insert = """
-            INSERT INTO animal (species, name, sex, size, chip, vaccines, sterilized, type)
+        String sql = """
+            INSERT INTO animal 
+            (species, breed, name, sex, size, chip, vaccines, sterilized)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?);
             """;
 
-        try (PreparedStatement ps = conn.prepareStatement(insert)) {
-            // Sample 1: Cat
-            ps.setString(1,"Cat");
-            ps.setString(2, "Luna");
-            ps.setString(3, "Female");
-            ps.setString(4, "Small");
-            ps.setBoolean(5, true); // chip
-            ps.setBoolean(6, true);  // vaccines
-            ps.setBoolean(7, true);  // sterilized
-            ps.setString(8, "Externo");
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            // Sample cat
+            ps.setString(1, "CAT");
+            ps.setString(2, "SIAMESE");
+            ps.setString(3, "Luna");
+            ps.setString(4, "Female");
+            ps.setString(5, "Small");
+            ps.setBoolean(6, true);
+            ps.setBoolean(7, true);
+            ps.setBoolean(8, true);
             ps.executeUpdate();
 
-            // Sample 2: Dog
-            ps.setString(1, "Dog");
-            ps.setString(2, "Max");
-            ps.setString(3, "Male");
-            ps.setString(4, "Medium");
-            ps.setBoolean(5, false); // chip
-            ps.setBoolean(6, false); // vaccines
-            ps.setBoolean(7, false); // sterilized
-            ps.setString(8, "Interno");
+            // Sample dog
+            ps.setString(1, "DOG");
+            ps.setString(2, "LABRADOR");
+            ps.setString(3, "Max");
+            ps.setString(4, "Male");
+            ps.setString(5, "Medium");
+            ps.setBoolean(6, false);
+            ps.setBoolean(7, false);
+            ps.setBoolean(8, false);
             ps.executeUpdate();
 
-            System.out.println("Inserted 2 sample animals.");
+            System.out.println("Inserted sample animals.");
+        }
+    }
+
+    /**
+     * Checks if the animal table already contains records.
+     */
+    private static boolean animalTableHasData(Connection conn) throws SQLException {
+
+        String sql = "SELECT COUNT(*) FROM animal";
+
+        try (Statement stmt = conn.createStatement();
+             var rs = stmt.executeQuery(sql)) {
+
+            rs.next();
+            return rs.getInt(1) > 0;
         }
     }
 }
