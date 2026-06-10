@@ -15,7 +15,7 @@ public class TableInitializer {
         try (Connection conn = DatabaseManager.getConnection()) {
 
             createAnimalTable(conn);
-            insertSampleAnimals(conn);
+            //insertSampleAnimals(conn);
 
             System.out.println("Database initialized successfully.");
 
@@ -52,9 +52,10 @@ public class TableInitializer {
         }
     }
 
+    /*
     /**
      * Inserts sample animals only if the table is empty.
-     */
+
     private static void insertSampleAnimals(Connection conn) throws SQLException {
 
         if (animalTableHasData(conn)) {
@@ -95,6 +96,7 @@ public class TableInitializer {
             System.out.println("Inserted sample animals.");
         }
     }
+*/
 
     /**
      * Checks if the animal table already contains records.
@@ -111,38 +113,3 @@ public class TableInitializer {
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
