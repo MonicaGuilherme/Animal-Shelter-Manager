@@ -6,9 +6,8 @@ import shelter.models.Animal;
 import shelter.models.Cat;
 import shelter.models.Dog;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.List;
 
 /**
  * Handles database operations for animals.
@@ -38,7 +37,7 @@ public class AnimalDAO {
             ps.setBoolean(7, animal.hasVaccines());
             ps.setBoolean(8, animal.isSterilized());
 
-            //ps.executeUpdate();
+            ps.executeUpdate();
 
             System.out.println("Animal saved successfully.");
 
@@ -62,6 +61,32 @@ public class AnimalDAO {
         }
 
         throw new IllegalArgumentException("Unsupported animal type.");
+    }
+
+    public void findAll() {
+
+        String sql = """
+            SELECT * FROM animal;
+            """;
+
+        try (Connection conn = DatabaseManager.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+
+                int id = rs.getInt("id");
+                String species = rs.getString("species");
+                String breed = rs.getString("breed");
+                String name = rs.getString("name");
+
+                System.out.println(id + " | " + species + " | " + breed + " | " + name);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
 
